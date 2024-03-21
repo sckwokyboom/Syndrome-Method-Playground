@@ -1,6 +1,9 @@
+package model
+
+import java.math.BigInteger
 import java.util.*
 
-class Codeword(private val size: Int) : BitSet() {
+class BinaryVector(private val size: Int) : BitSet() {
     // TODO: create constructor from String
 //    constructor(codeword: String) {
 //        return this;
@@ -11,9 +14,12 @@ class Codeword(private val size: Int) : BitSet() {
         }
     }
 
-    constructor(value: Int, codeLength: Int) : this(codeLength) {
+    constructor(value: Int, codeLength: Int) : this(BigInteger.valueOf(value.toLong()), codeLength)
+    constructor(value: Long, codeLength: Int) : this(BigInteger.valueOf(value), codeLength)
+
+    constructor(value: BigInteger, codeLength: Int) : this(codeLength) {
         for (j in 0 until codeLength + 1) {
-            if ((value and (1 shl j)) != 0) {
+            if ((value and (BigInteger.valueOf(1).shl(j))) != BigInteger.ZERO) {
                 this.set(j)
             }
         }
@@ -44,7 +50,7 @@ class Codeword(private val size: Int) : BitSet() {
         return size
     }
 
-    operator fun plus(other: Codeword): Codeword {
+    operator fun plus(other: BinaryVector): BinaryVector {
         val tmp = this
         tmp.or(other)
         return tmp

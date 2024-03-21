@@ -1,6 +1,6 @@
 package canonicalconverter.parser
 
-import Matrix
+import canonicalconverter.Matrix
 import mu.KotlinLogging
 
 class MatrixParser {

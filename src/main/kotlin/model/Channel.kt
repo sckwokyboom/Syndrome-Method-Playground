@@ -1,15 +1,14 @@
-package ru.nsu.fit.sckwo
+package model
 
-import Codeword
 import java.util.*
 
 // TODO: add tests
 class Channel(private val probabilityOfError: Double, private val lengthOfCodewords: Int) {
     // TODO: add check invariants
     private val random = Random()
-    private var info: Codeword = Codeword(lengthOfCodewords)
+    private var info: BinaryVector = BinaryVector(lengthOfCodewords)
 
-    fun sendInfo(info: Codeword) {
+    fun sendInfo(info: BinaryVector) {
         for (i in 0 until info.size()) {
             if (random.nextDouble() < probabilityOfError) {
                 info.flip(i)
@@ -18,7 +17,7 @@ class Channel(private val probabilityOfError: Double, private val lengthOfCodewo
         this.info = info
     }
 
-    fun receiveInfo(): Codeword {
+    fun receiveInfo(): BinaryVector {
         return info
     }
 }

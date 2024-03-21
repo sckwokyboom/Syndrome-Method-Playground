@@ -1,4 +1,8 @@
+package model.code
+
 import canonicalconverter.CanonicalConverter
+import model.BinaryVector
+import canonicalconverter.Matrix
 import java.util.*
 import java.util.stream.Stream
 import kotlin.math.pow
@@ -28,9 +32,9 @@ class HadamardCode(private val codeDimension: Int) : Code {
         parityCheckMatrix = convertor.toParityCheck(generatorMatrix)
     }
 
-    override fun getAllCodewords(): Stream<Codeword> {
+    override fun getAllCodewords(): Stream<BinaryVector> {
         val countOfCodewords = (2.0.pow(codeDimension) - 1).toInt()
-        val codeWords = HashSet<Codeword>()
+        val codeWords = HashSet<BinaryVector>()
         for (i in 0 until countOfCodewords + 1) {
             val basicVectors = BitSet(codeLength)
             for (j in 0 until codeLength) {
@@ -38,10 +42,10 @@ class HadamardCode(private val codeDimension: Int) : Code {
                     basicVectors.set(j)
                 }
             }
-            var codeWord = Codeword(codeLength)
+            var codeWord = BinaryVector(codeLength)
             basicVectors.stream().forEach { ind ->
                 run {
-                    codeWord += Codeword(generatorMatrix.row(ind))
+                    codeWord += BinaryVector(generatorMatrix.row(ind))
                 }
             }
             codeWords.add(codeWord)

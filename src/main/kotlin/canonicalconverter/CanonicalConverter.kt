@@ -1,6 +1,5 @@
 package canonicalconverter
 
-import Matrix
 import canonicalconverter.parser.MatrixParser
 import canonicalconverter.service.MatrixConverter
 import canonicalconverter.tester.IsLinearSystemSolutionTester

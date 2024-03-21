@@ -1,6 +1,6 @@
 package canonicalconverter.tester
 
-import Matrix
+import canonicalconverter.Matrix
 import mu.KotlinLogging
 
 class NonDegeneracyTester : MatrixTester {
