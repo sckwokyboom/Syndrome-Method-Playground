@@ -1,13 +1,13 @@
 package model.code
 
 import canonicalconverter.CanonicalConverter
-import model.BinaryVector
 import canonicalconverter.Matrix
+import model.BinaryVector
 import java.util.*
 import java.util.stream.Stream
 import kotlin.math.pow
 
-class HammingCode(val parityLength: Int) : Code {
+class HammingCode(parityLength: Int) : Code() {
     companion object {
         private fun generateHammingParityCheckMatrix(parityLength: Int): Matrix {
             val codeLength = (2.0.pow(parityLength) - 1).toInt()
@@ -22,10 +22,11 @@ class HammingCode(val parityLength: Int) : Code {
         }
     }
 
-    val codeLength: Int = (2.0.pow(parityLength) - 1).toInt()
-    val parityCheckMatrix: Matrix = generateHammingParityCheckMatrix(parityLength)
-    val generatorMatrix: Matrix
-    private val codeDimension: Int = codeLength - parityLength
+    override val length: Int = (2.0.pow(parityLength) - 1).toInt()
+    override val parityCheckMatrix: Matrix = generateHammingParityCheckMatrix(parityLength)
+    override val generatorMatrix: Matrix
+    private val codeDimension: Int = length - parityLength
+    override val parityCheckLength = parityLength
 
     init {
         val convertor = CanonicalConverter()
@@ -37,13 +38,13 @@ class HammingCode(val parityLength: Int) : Code {
         val countOfCodewords = (2.0.pow(codeDimension) - 1).toInt()
         val codeWords = HashSet<BinaryVector>()
         for (i in 0 until countOfCodewords) {
-            val basicVectors = BitSet(codeLength)
-            for (j in 0 until codeLength + 1) {
+            val basicVectors = BitSet(length)
+            for (j in 0 until length + 1) {
                 if ((i and (1 shl j)) != 0) {
                     basicVectors.set(j)
                 }
             }
-            var codeWord = BinaryVector(codeLength)
+            var codeWord = BinaryVector(length)
             basicVectors.stream().forEach { ind ->
                 run {
                     codeWord += BinaryVector(generatorMatrix.row(ind))

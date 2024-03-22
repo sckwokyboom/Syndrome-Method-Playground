@@ -10,7 +10,7 @@ class BinaryVector(private val size: Int) : BitSet() {
 //    }
     constructor(codeword: Array<Int>) : this(codeword.size) {
         for (i in codeword.indices) {
-            this.set(i, codeword[i] == 1)
+            this.set(i, codeword[i] != 0)
         }
     }
 
@@ -35,7 +35,7 @@ class BinaryVector(private val size: Int) : BitSet() {
 
     fun toArray(): Array<Int> {
         val arr = ArrayList<Int>(size)
-        for (i in 0 until size + 1) {
+        for (i in 0 until size) {
             arr.add(i, this[i].compareTo(false))
         }
         return arr.toTypedArray()
@@ -51,8 +51,14 @@ class BinaryVector(private val size: Int) : BitSet() {
     }
 
     operator fun plus(other: BinaryVector): BinaryVector {
-        val tmp = this
-        tmp.or(other)
+        val tmp = this.clone() as BinaryVector
+        tmp.xor(other)
+        return tmp
+    }
+
+    operator fun times(other: BinaryVector): BinaryVector {
+        val tmp = this.clone() as BinaryVector
+        tmp.xor(other)
         return tmp
     }
 

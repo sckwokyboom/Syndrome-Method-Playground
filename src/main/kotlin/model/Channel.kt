@@ -9,12 +9,12 @@ class Channel(private val probabilityOfError: Double, private val lengthOfCodewo
     private var info: BinaryVector = BinaryVector(lengthOfCodewords)
 
     fun sendInfo(info: BinaryVector) {
+        this.info = info.clone() as BinaryVector
         for (i in 0 until info.size()) {
             if (random.nextDouble() < probabilityOfError) {
-                info.flip(i)
+                this.info.flip(i)
             }
         }
-        this.info = info
     }
 
     fun receiveInfo(): BinaryVector {

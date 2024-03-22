@@ -1,5 +1,7 @@
 package canonicalconverter
 
+import model.BinaryVector
+
 class Matrix {
     var cols: Int
     val rows: Int
@@ -11,7 +13,7 @@ class Matrix {
 
     constructor(vector: Array<Int>) {
         this.rows = 1
-        this.cols = vector.size - 1
+        this.cols = vector.size
         require(rows > 0 && cols > 0) { "Количество строк и столбцов должно быть положительным целым числом." }
         this.data = arrayOf(vector)
     }
@@ -348,5 +350,13 @@ class Matrix {
         result = 31 * result + cols
         result = 31 * result + data.contentDeepHashCode()
         return result
+    }
+
+    operator fun times(binaryVector: BinaryVector): BinaryVector {
+        val transposeVector = Matrix(binaryVector.size(), 1)
+        for (i in 0 until binaryVector.size()) {
+            transposeVector[i, 0] = binaryVector[i].compareTo(false)
+        }
+        return BinaryVector((this * transposeVector).rem(2).column(0))
     }
 }
