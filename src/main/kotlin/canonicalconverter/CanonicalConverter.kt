@@ -56,4 +56,11 @@ class CanonicalConverter {
 
         return to
     }
+
+    companion object {
+        fun isParityCheckMatrix(candidate: Matrix): Boolean {
+            val nonDegeneracyTester = NonDegeneracyTester()
+            return nonDegeneracyTester.test(candidate)
+        }
+    }
 }

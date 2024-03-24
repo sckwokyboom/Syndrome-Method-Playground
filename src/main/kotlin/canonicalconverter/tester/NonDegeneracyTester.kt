@@ -8,7 +8,7 @@ class NonDegeneracyTester : MatrixTester {
 
     override fun test(vararg matrices: Matrix) = matrices.all {
         if (containsZero(it)) {
-            logger.trace { "матрица вырожденная, так как содержит нулевую строку" }
+            logger.trace { "Матрица вырожденная, так как содержит нулевую строку." }
             return@all false
         }
         if (it.isSquare() && it.determinant() == 0) {

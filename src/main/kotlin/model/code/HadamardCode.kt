@@ -7,7 +7,7 @@ import java.util.*
 import java.util.stream.Stream
 import kotlin.math.pow
 
-class HadamardCode(private val codeDimension: Int) : Code() {
+class HadamardCode(override val dimension: Int) : Code() {
     companion object {
         private fun generateHammingParityCheckMatrix(codeDimension: Int): Matrix {
             val codeLength = (2.0.pow(codeDimension) - 1).toInt()
@@ -22,34 +22,13 @@ class HadamardCode(private val codeDimension: Int) : Code() {
         }
     }
 
-    override val length: Int = (2.0.pow(codeDimension) - 1).toInt()
-    override val generatorMatrix: Matrix = generateHammingParityCheckMatrix(codeDimension)
+    override val length: Int = (2.0.pow(dimension) - 1).toInt()
+    override val generatorMatrix: Matrix = generateHammingParityCheckMatrix(dimension)
     override val parityCheckMatrix: Matrix
-    override val parityCheckLength: Int = length - codeDimension
+    override val parityCheckLength: Int = length - dimension
 
     init {
         val convertor = CanonicalConverter()
         parityCheckMatrix = convertor.toParityCheck(generatorMatrix)
-    }
-
-    override fun getAllCodewords(): Stream<BinaryVector> {
-        val countOfCodewords = (2.0.pow(codeDimension) - 1).toInt()
-        val codeWords = HashSet<BinaryVector>()
-        for (i in 0 until countOfCodewords + 1) {
-            val basicVectors = BitSet(length)
-            for (j in 0 until length) {
-                if ((i and (1 shl j)) != 0) {
-                    basicVectors.set(j)
-                }
-            }
-            var codeWord = BinaryVector(length)
-            basicVectors.stream().forEach { ind ->
-                run {
-                    codeWord += BinaryVector(generatorMatrix.row(ind))
-                }
-            }
-            codeWords.add(codeWord)
-        }
-        return codeWords.stream()
     }
 }

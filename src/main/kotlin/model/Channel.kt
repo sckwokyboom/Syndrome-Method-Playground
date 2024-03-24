@@ -6,18 +6,18 @@ import java.util.*
 class Channel(private val probabilityOfError: Double, private val lengthOfCodewords: Int) {
     // TODO: add check invariants
     private val random = Random()
-    private var info: BinaryVector = BinaryVector(lengthOfCodewords)
+    private var currentDataVector: BinaryVector = BinaryVector(lengthOfCodewords)
 
-    fun sendInfo(info: BinaryVector) {
-        this.info = info.clone() as BinaryVector
-        for (i in 0 until info.size()) {
+    fun send(dataVector: BinaryVector) {
+        this.currentDataVector = dataVector.clone() as BinaryVector
+        for (i in 0 until dataVector.size()) {
             if (random.nextDouble() < probabilityOfError) {
-                this.info.flip(i)
+                this.currentDataVector.flip(i)
             }
         }
     }
 
-    fun receiveInfo(): BinaryVector {
-        return info
+    fun receive(): BinaryVector {
+        return currentDataVector
     }
 }

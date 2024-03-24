@@ -19,7 +19,7 @@ class BinaryVector(private val size: Int) : BitSet() {
 
     constructor(value: BigInteger, codeLength: Int) : this(codeLength) {
         for (j in 0 until codeLength + 1) {
-            if ((value and (BigInteger.valueOf(1).shl(j))) != BigInteger.ZERO) {
+            if ((value and (BigInteger.ONE.shl(j))) != BigInteger.ZERO) {
                 this.set(j)
             }
         }
