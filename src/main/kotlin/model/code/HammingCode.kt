@@ -1,7 +1,7 @@
 package model.code
 
-import canonicalconverter.CanonicalConverter
-import canonicalconverter.Matrix
+import model.canonicalconverter.CanonicalConverter
+import model.canonicalconverter.Matrix
 import kotlin.math.pow
 
 class HammingCode(override val parityCheckLength: Int) : Code() {

@@ -1,7 +1,7 @@
 package model
 
 import allBinaryVectorPermutations
-import canonicalconverter.Matrix
+import model.canonicalconverter.Matrix
 import model.code.Code
 import kotlin.math.pow
 

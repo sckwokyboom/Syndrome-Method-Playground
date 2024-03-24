@@ -1,6 +1,6 @@
 package model.code
 
-import canonicalconverter.Matrix
+import model.canonicalconverter.Matrix
 import model.BinaryVector
 import java.util.*
 import java.util.stream.Stream

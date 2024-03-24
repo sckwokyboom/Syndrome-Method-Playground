@@ -1,6 +1,6 @@
-package canonicalconverter.service
+package model.canonicalconverter.service
 
-import canonicalconverter.Matrix
+import model.canonicalconverter.Matrix
 import mu.KotlinLogging
 
 object MatrixConverter {

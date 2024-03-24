@@ -1,8 +1,8 @@
 package model.code
 
 import allBinaryVectorPermutations
-import canonicalconverter.CanonicalConverter
-import canonicalconverter.Matrix
+import model.canonicalconverter.CanonicalConverter
+import model.canonicalconverter.Matrix
 import model.BinaryVector
 import java.math.BigInteger
 

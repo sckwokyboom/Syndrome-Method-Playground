@@ -1,9 +1,9 @@
-package canonicalconverter
+package model.canonicalconverter
 
-import canonicalconverter.parser.MatrixParser
-import canonicalconverter.service.MatrixConverter
-import canonicalconverter.tester.IsLinearSystemSolutionTester
-import canonicalconverter.tester.NonDegeneracyTester
+import model.canonicalconverter.parser.MatrixParser
+import model.canonicalconverter.service.MatrixConverter
+import model.canonicalconverter.tester.IsLinearSystemSolutionTester
+import model.canonicalconverter.tester.NonDegeneracyTester
 
 class CanonicalConverter {
     fun toGenerative(matrix: String): String {

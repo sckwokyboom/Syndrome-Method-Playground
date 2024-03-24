@@ -1,4 +1,4 @@
-package canonicalconverter
+package model.canonicalconverter
 
 import model.BinaryVector
 

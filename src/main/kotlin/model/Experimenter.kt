@@ -1,4 +1,5 @@
-import model.Channel
+package model
+
 import model.code.Code
 
 class Experimenter {

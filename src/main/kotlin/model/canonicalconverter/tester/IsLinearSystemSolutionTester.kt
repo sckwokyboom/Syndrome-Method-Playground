@@ -1,6 +1,6 @@
-package canonicalconverter.tester
+package model.canonicalconverter.tester
 
-import canonicalconverter.Matrix
+import model.canonicalconverter.Matrix
 
 class IsLinearSystemSolutionTester : MatrixTester {
     override fun test(vararg matrices: Matrix): Boolean {

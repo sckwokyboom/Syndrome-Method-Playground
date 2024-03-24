@@ -1,16 +1,16 @@
-import model.BinaryVector
-import model.SyndromeTable
+package model
+
 import model.code.Code
 
 class Decoder(private val code: Code) {
     private val syndromeTable = SyndromeTable(code)
     fun decode(vector: BinaryVector): BinaryVector {
-        println(vector)
+//        println(vector)
         //TODO(check codeword in code)
         val syndrome = code.parityCheckMatrix * vector
-        println("Syndrome: $syndrome;")
+//        println("Syndrome: $syndrome;")
         val errorVector = syndromeTable.getLeader(syndrome)
-        println("Error: $errorVector;")
+//        println("Error: $errorVector;")
         return vector + errorVector
     }
 }
